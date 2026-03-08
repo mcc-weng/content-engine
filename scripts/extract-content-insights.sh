@@ -111,9 +111,28 @@ $DEDUP_SECTION"
         continue
     fi
 
-    # Append to content log
-    echo "" >> "$CONTENT_LOG"
-    echo "$INSIGHTS" >> "$CONTENT_LOG"
+    # Prepend to content log (after header)
+    # Header ends at "---" line, insert new content right after it
+    HEADER_END=$(grep -n "^---$" "$CONTENT_LOG" | head -1 | cut -d: -f1)
+    if [ -n "$HEADER_END" ]; then
+        # Split file: header (lines 1-HEADER_END) + rest
+        HEAD_PART=$(head -n "$HEADER_END" "$CONTENT_LOG")
+        TAIL_PART=$(tail -n +"$((HEADER_END + 1))" "$CONTENT_LOG")
+        {
+            echo "$HEAD_PART"
+            echo ""
+            echo "$INSIGHTS"
+            echo "$TAIL_PART"
+        } > "$CONTENT_LOG"
+    else
+        # No header found, just prepend
+        EXISTING=$(cat "$CONTENT_LOG")
+        {
+            echo "$INSIGHTS"
+            echo ""
+            echo "$EXISTING"
+        } > "$CONTENT_LOG"
+    fi
 
     # Update state with new insights and bytes
     echo "$INSIGHTS" | python3 "$EXTRACTOR" --update-state "$SESSION_ID" "$CURRENT_BYTES"
