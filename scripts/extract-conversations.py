@@ -93,9 +93,9 @@ def has_new_content(jsonl_path, session_id, state):
     return current_bytes > stored_bytes, current_bytes
 
 
-def list_changed_sessions(target_date, process_all, state):
+def list_changed_sessions(target_date, state):
     """Return list of sessions with new content."""
-    convos = get_conversations(target_date if not process_all else None, process_all=process_all)
+    convos = get_conversations(target_date, process_all=target_date is None)
     changed = []
     for jsonl_path in convos:
         session_id, project, messages = extract_messages(jsonl_path)
@@ -116,8 +116,8 @@ def list_changed_sessions(target_date, process_all, state):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--date", help="Date to process (YYYY-MM-DD), defaults to today")
-    parser.add_argument("--all", action="store_true", help="Process all conversations (backfill)")
+    parser.add_argument("--date", help="Date to process (YYYY-MM-DD). If omitted, scans all files.")
+    parser.add_argument("--all", action="store_true", help="(deprecated, now default) Process all conversations")
     parser.add_argument("--skip-processed", action="store_true", default=True)
     parser.add_argument("--list-changed", action="store_true", help="Output JSON array of sessions with new content")
     parser.add_argument("--extract-session", metavar="PATH", help="Output full transcript for a single session JSONL file")
@@ -129,10 +129,10 @@ def main():
 
     # --list-changed mode
     if args.list_changed:
-        target_date = date.today()
+        target_date = None  # default: scan all files
         if args.date:
             target_date = date.fromisoformat(args.date)
-        changed = list_changed_sessions(target_date, args.all, state)
+        changed = list_changed_sessions(target_date, state)
         print(json.dumps(changed, indent=2))
         return
 
