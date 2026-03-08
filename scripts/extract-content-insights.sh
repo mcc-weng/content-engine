@@ -19,13 +19,18 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Extract conversations
-TRANSCRIPTS=$(python3 "$EXTRACTOR" $DATE_FLAG $ALL_FLAG)
+# Get sessions with new content
+CHANGED=$(python3 "$EXTRACTOR" --list-changed $DATE_FLAG $ALL_FLAG)
 
-if [ -z "$TRANSCRIPTS" ]; then
+# Check if any sessions need processing
+SESSION_COUNT=$(echo "$CHANGED" | python3 -c "import json,sys; print(len(json.load(sys.stdin)))")
+
+if [ "$SESSION_COUNT" = "0" ]; then
     echo "No new conversations to process."
     exit 0
 fi
+
+echo "Found $SESSION_COUNT session(s) with new content."
 
 # Create content log if it doesn't exist
 if [ ! -f "$CONTENT_LOG" ]; then
@@ -33,8 +38,40 @@ if [ ! -f "$CONTENT_LOG" ]; then
     echo "" >> "$CONTENT_LOG"
 fi
 
-PROMPT=$(cat <<'PROMPT_EOF'
-You are a content strategist analyzing Claude Code conversation transcripts. Extract content-worthy insights for short-form video and Twitter threads.
+# Process each session
+echo "$CHANGED" | python3 -c "
+import json, sys
+sessions = json.load(sys.stdin)
+for s in sessions:
+    print(f\"{s['session_id']}|{s['path']}|{s['current_bytes']}|{s['date']}\")
+" | while IFS='|' read -r SESSION_ID SESSION_PATH CURRENT_BYTES SESSION_DATE; do
+    echo "Processing session $SESSION_ID ($SESSION_DATE)..."
+
+    # Extract full transcript
+    TRANSCRIPT=$(python3 "$EXTRACTOR" --extract-session "$SESSION_PATH")
+
+    if [ -z "$TRANSCRIPT" ]; then
+        echo "  Skipping — empty transcript."
+        continue
+    fi
+
+    # Get previously extracted insights
+    PREV_INSIGHTS=$(python3 "$EXTRACTOR" --get-insights "$SESSION_ID")
+
+    # Build the prompt with dedup instructions
+    if [ -n "$PREV_INSIGHTS" ]; then
+        DEDUP_SECTION="
+
+PREVIOUSLY EXTRACTED INSIGHTS (do NOT re-extract these — only find NEW insights not covered below):
+
+$PREV_INSIGHTS
+
+END OF PREVIOUSLY EXTRACTED INSIGHTS."
+    else
+        DEDUP_SECTION=""
+    fi
+
+    PROMPT="You are a content strategist analyzing Claude Code conversation transcripts. Extract content-worthy insights for short-form video and Twitter threads.
 
 Target audience: Mixed — non-technical people discovering AI + developers learning Claude Code.
 
@@ -42,7 +79,7 @@ For each insight, use EXACTLY this format (output raw markdown, no code fences):
 
 1. **Short description**
    - Context: What happened, backstory, key details
-   - Hook: "The scroll-stopping one-liner"
+   - Hook: \"The scroll-stopping one-liner\"
    - Angle: Why the audience cares / takeaway
    - Format: short-form | thread | long-form
    - Category: struggle | aha | decision | hot-take | authority
@@ -61,20 +98,27 @@ Rules:
 - Group by date using ## YYYY-MM-DD headings
 - Add a ### Themes section per date if patterns emerge
 - Output ONLY the formatted insights, nothing else
-- If no insights found, output "No content-worthy insights found."
-PROMPT_EOF
-)
+- If no NEW insights found, output exactly \"No content-worthy insights found.\"
+$DEDUP_SECTION"
 
-# Send to claude CLI for analysis
-INSIGHTS=$(echo "$TRANSCRIPTS" | claude --print --dangerously-skip-permissions "$PROMPT")
+    # Send to claude CLI for analysis
+    INSIGHTS=$(echo "$TRANSCRIPT" | claude --print --dangerously-skip-permissions "$PROMPT")
 
-if [ "$INSIGHTS" = "No content-worthy insights found." ]; then
-    echo "No content-worthy insights found."
-    exit 0
-fi
+    if [ "$INSIGHTS" = "No content-worthy insights found." ]; then
+        echo "  No new insights found."
+        # Still update bytes so we don't re-process unchanged content
+        echo "" | python3 "$EXTRACTOR" --update-state "$SESSION_ID" "$CURRENT_BYTES"
+        continue
+    fi
 
-# Append to content log
-echo "" >> "$CONTENT_LOG"
-echo "$INSIGHTS" >> "$CONTENT_LOG"
+    # Append to content log
+    echo "" >> "$CONTENT_LOG"
+    echo "$INSIGHTS" >> "$CONTENT_LOG"
 
-echo "Content insights appended to $CONTENT_LOG"
+    # Update state with new insights and bytes
+    echo "$INSIGHTS" | python3 "$EXTRACTOR" --update-state "$SESSION_ID" "$CURRENT_BYTES"
+
+    echo "  Insights appended to content log."
+done
+
+echo "Done."
