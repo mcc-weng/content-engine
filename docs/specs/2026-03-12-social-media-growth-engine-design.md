@@ -50,11 +50,12 @@ Non-technical Chinese-speaking professionals, 35-50, curious about AI but intimi
 ├── cc-draft/
 │   ├── SKILL.md
 │   ├── references/
-│   │   ├── voice-profile.md
 │   │   ├── anti-ai-patterns.md
 │   │   └── post-examples.md
 │   └── assets/
 │       └── post-templates.md
+│   # NOTE: voice-profile.md lives in Obsidian vault (content-voice.md)
+│   # cc-draft reads it directly — no copy to avoid drift
 ├── cc-review/
 │   ├── SKILL.md
 │   └── references/
@@ -73,9 +74,9 @@ Non-technical Chinese-speaking professionals, 35-50, curious about AI but intimi
 ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/brain/projects/
 ├── content-log.md          (existing — auto-extracted conversation insights)
 ├── content-ideas.md        (NEW — ideas vault, raw inputs + queue)
-├── content-voice.md        (NEW — voice profile, also copied into cc-draft/references/)
-├── content-research.md     (NEW — research findings)
-└── content-posts.md        (NEW — log of published posts)
+├── content-voice.md        (NEW — voice profile, single source of truth)
+├── content-research.md     (NEW — created when /cc-research is built)
+└── content-posts.md        (NEW — log of published posts, archive after 30 entries)
 ```
 
 ### Data Flow
@@ -125,7 +126,7 @@ description: Capture raw content ideas into the ideas vault. Use when user says 
   - Raw: (original input verbatim)
   - Angle: (suggested angle, or "none yet")
   - Source: (URL if applicable)
-  - Status: raw | drafted | approved | posted
+  - Status: raw | drafted | posted
 
 ## Used
 - **[YYYY-MM-DD]** [type] Short description
@@ -144,7 +145,7 @@ description: Research trending topics and content opportunities for Threads. Use
 ```
 
 **Workflow:**
-1. Use WebSearch + Playwright to scan trending Chinese AI content on Threads/X
+1. Use WebSearch as primary tool to find trending Chinese AI content on Threads/X
 2. Identify top 3-5 topics getting engagement in target niche
 3. For each: note hook, engagement level, why it's working
 4. Cross-reference with ideas vault — flag matching queued ideas
@@ -152,7 +153,7 @@ description: Research trending topics and content opportunities for Threads. Use
 6. Deposit findings to content-research.md with date header
 7. Present: trending topics, recommended angles, matched ideas
 
-**Tools used:** WebSearch (quick scans), Playwright (deep scraping of Threads feeds)
+**Tools used:** WebSearch (primary — Google results for trending Threads/AI topics), Playwright (fallback — direct page scraping, but unreliable due to Meta's anti-scraping. Aspirational for Phase 2.)
 
 ### 3. /cc-draft — Post Writer
 
@@ -165,7 +166,7 @@ description: Draft Threads posts in Mike's authentic voice. Use when user says "
 ```
 
 **Workflow:**
-1. **Always first:** Read references/voice-profile.md and references/anti-ai-patterns.md
+1. **Always first:** Read content-voice.md from Obsidian vault and references/anti-ai-patterns.md
 2. Accept input: specific idea, idea from queue, or from research findings
 3. Read source material: content-ideas.md, content-log.md, research findings
 4. Read references/post-examples.md for style reference
@@ -176,7 +177,10 @@ description: Draft Threads posts in Mike's authentic voice. Use when user says "
    - Hook first, engagement close
 6. **Self-check gate:** Review against anti-AI patterns. If detected, rewrite.
 7. Present: post text, source idea, character count, "does this sound like you?"
-8. Accept inline edits. On approval, update ideas vault status to `drafted`
+8. Accept inline edits or "reject and try again from scratch"
+9. On approval, update ideas vault status to `drafted`
+
+**Character count:** 300 is a style guideline, not an API limit. Count Unicode characters (each Chinese char = 1). Threads API limit is 500 chars — stay well under for readability.
 
 ### 4. /cc-review — Daily Dashboard
 
@@ -202,7 +206,7 @@ description: Show daily content dashboard with queued drafts, recent posts, and 
    Streak: N days
    Suggested for today: [topic] — [reason]
    ```
-7. User picks → hand off to /cc-draft or /cc-post
+7. User picks → suggest next command (e.g. "Run `/cc-draft` with idea #3"). Handoff is manual — user invokes the next skill.
 
 **Content Calendar:**
 ```
@@ -238,10 +242,14 @@ description: Publish approved content to Threads. Use when user says "/cc-post",
    - Confirm with link
 5. On failure: show error, suggest retry
 
-**Posting script:** New module at `~/Desktop/Projects/content/scripts/post-to-threads.py`. Borrows auth/API patterns from `~/Desktop/Projects/threads-poster/app/services/threads.py`:
+**Posting script:** New module at `~/Desktop/Projects/content/scripts/post-to-threads.py`.
+- **Sync** (not async) — runs from shell via Claude Code, uses `requests` not `httpx`
+- Borrows auth/API patterns from `~/Desktop/Projects/threads-poster/app/services/threads.py`
 - Step 1: Create container (POST to graph.threads.net)
 - Step 2: Publish (POST with creation_id)
 - Step 3: Get permalink
+- **Token management:** Threads long-lived tokens expire ~60 days. Stored in env var `THREADS_ACCESS_TOKEN`. On 401 error, skill should tell user to regenerate token and update env var. Auto-refresh is Phase 2.
+- **Error handling:** Retry once on 5xx. On 4xx, show error message and suggest fix. On network error, show and abort.
 
 ### 6. /cc-recap — End of Day Summary
 
@@ -346,8 +354,14 @@ Casual friend who experiments with AI and shows receipts. Not a teacher, not a g
 - Env vars: THREADS_ACCESS_TOKEN, THREADS_USER_ID
 
 **Available tools for /cc-research:**
-- WebSearch — quick trend scanning
-- Playwright — deep Threads feed scraping, engagement data
+- WebSearch — primary, quick trend scanning via Google
+- Playwright — fallback/aspirational, direct Threads scraping (unreliable due to Meta anti-scraping)
+
+**Content calendar:** Static template embedded in cc-review/references/content-calendar.md. Not a dynamic file in Phase 1. Dynamic generation is Phase 2+.
+
+**Concurrent writes:** Low risk in Phase 1 (manual triggers, low frequency). The cron writes to content-log.md while skills write to content-ideas.md and content-posts.md — different files. No mitigation needed for Phase 1.
+
+**Ideas vault archival:** When the "Used" section of content-ideas.md exceeds 30 entries, move older entries to content-ideas-archive.md. Can be manual or added to /cc-recap in Phase 2.
 
 ---
 
