@@ -22,6 +22,9 @@ This spec covers positioning, platform strategy, content pillars, monetization p
 - Monetization becomes central to the content (freelance AI automation → productized service → SaaS)
 - Audience expands to English-speaking indie hackers, entrepreneurs, AI builders
 
+### Relationship to Existing Spec
+This spec supersedes the Phase 3 (multi-platform) timeline in the social media growth engine spec (`docs/specs/2026-03-12-social-media-growth-engine-design.md`). X is being accelerated to Day 1 rather than deferred to month 2+. The existing Threads infrastructure and Chinese content track continue as designed in that spec.
+
 ## Identity & Positioning
 
 **Brand narrative:** "Building my way from Taiwan to America — one AI automation at a time"
@@ -143,9 +146,11 @@ These targets are directional. Actual numbers shared publicly become content reg
 
 **`/cc-draft` skill**
 - Add English X mode alongside existing Chinese Threads mode
-- Different voice profile per language
-- Different length constraints (X: 280 chars, Threads: 500 chars)
 - Platform parameter: `--platform x` or `--platform threads`
+- Voice profile routing: `--platform x` reads `content-voice-en.md`; `--platform threads` reads `content-voice.md` (Chinese)
+- If `content-voice-en.md` does not exist yet, use inline fallback guidelines: direct, raw, no polish, smart friend energy
+- Different length constraints (X: 280 chars, Threads: 500 chars)
+- Load corresponding anti-AI patterns per language
 
 **`/cc-post` skill**
 - Add X (Twitter) API posting capability
@@ -162,6 +167,7 @@ These targets are directional. Actual numbers shared publicly become content reg
 **Ideas vault (`content-ideas.md`)**
 - Add `platform` field: `x` | `threads` | `both`
 - Ideas can target one or both platforms
+- Existing entries without a `platform` field default to `threads`
 
 ### New Things Needed
 
@@ -173,11 +179,17 @@ These targets are directional. Actual numbers shared publicly become content reg
 **X API posting script**
 - New Python script for X/Twitter API integration
 - Same pattern as existing `post-to-threads.py`
-- Env vars: X API keys
+- X API requires at minimum the **Basic** tier ($100/month) for write access — free tier is read-only
+- Auth: OAuth 1.0a (User Context) for posting on behalf of your account
+- Env vars: `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_TOKEN_SECRET`
+- Rate limit: 100 posts per 24hrs on Basic tier (more than enough)
+- Error handling: same pattern as Threads script (retry on 5xx, user-friendly on 4xx)
+- **Note:** X API cost may not be worth it until content is consistent. Manual posting via copy-paste is fine for Month 1.
 
 **English anti-AI patterns**
 - Different tells than Chinese (e.g., "In today's rapidly evolving...", "Let's dive in", "Here's the thing:")
 - Store alongside existing Chinese anti-AI patterns
+- Full English anti-AI patterns document to be created by end of Month 1, after real writing samples exist to calibrate against
 
 ## Launch Plan
 
@@ -216,8 +228,9 @@ These targets are directional. Actual numbers shared publicly become content reg
 
 ## Success Criteria
 
-- Posting consistently on both platforms within week 1
+- At least 5 posts on each platform in week 1
 - First freelance client within month 1-2
 - English voice profile documented by end of month 1
+- English anti-AI patterns documented by end of month 1
 - Revenue tracked publicly monthly
 - Content engine updated to support dual-track by end of month 1
