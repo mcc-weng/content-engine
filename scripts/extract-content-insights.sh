@@ -5,7 +5,7 @@ set -euo pipefail
 unset CLAUDECODE 2>/dev/null || true
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-CONTENT_LOG="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/brain/projects/content-log.md"
+CONTENT_LOG="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/brain/content/log.md"
 EXTRACTOR="$SCRIPT_DIR/extract-conversations.py"
 
 DATE_FLAG=""
@@ -102,7 +102,7 @@ Rules:
 $DEDUP_SECTION"
 
     # Send to claude CLI for analysis
-    INSIGHTS=$(echo "$TRANSCRIPT" | claude --print --dangerously-skip-permissions "$PROMPT")
+    INSIGHTS=$(echo "$TRANSCRIPT" | /Users/mikeweng/.local/bin/claude --print --dangerously-skip-permissions "$PROMPT")
 
     if [ "$INSIGHTS" = "No content-worthy insights found." ]; then
         echo "  No new insights found."
