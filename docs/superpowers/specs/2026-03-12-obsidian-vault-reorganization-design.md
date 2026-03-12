@@ -30,7 +30,7 @@ brain/
 │   ├── justin-welsh-creator-mba.md
 │   └── ...
 ├── me/                 # personal identity, goals, planning
-│   ├── skills.md
+│   ├── skills-inventory.md
 │   ├── goals.md
 │   └── obsessions.md
 ├── templates/          # note templates
@@ -128,29 +128,42 @@ One level of subfolders maximum. No deep nesting.
 | `projects/content-research.md` | `content/research.md` | Keep content |
 | `projects/content-voice.md` | `content/voice.md` | Keep content |
 | `projects/2026-03-09-first-dollar-sprint-plan.md` | `projects/first-dollar-sprint.md` | Rename |
-| `Plan.md` (root) | `me/skills-and-obsessions.md` | It's personal inventory |
+| `Plan.md` (root) | Split into 3 files (see below) | Delete after splitting |
+| `references/` (folder) | `resources/` | Rename folder (currently empty) |
 | `MOCs/References.md` | `MOCs/Resources.md` | Match folder name |
+| `templates/reference-note.md` | `templates/resource-note.md` | Match folder name |
+
+### Plan.md split
+
+`Plan.md` contains a goals list and a skills/obsessions audit. Split into:
+- `me/skills-inventory.md` — Tasks 1 & 3 (skills list, intersection analysis)
+- `me/goals.md` — goals list (items 1-6 at top of Plan.md)
+- `me/obsessions.md` — Task 2 (obsession audit)
+
+Delete `Plan.md` after splitting.
 
 ### New files to create
 
-- `MOCs/Content.md` — index for content pipeline
-- `MOCs/Interests.md` — index for interests
-- `MOCs/Me.md` — index for personal
+- `content/drafts.md` — new file, no existing equivalent
+- `MOCs/Content.md` — index linking to all `content/*.md` files
+- `MOCs/Interests.md` — index linking to all `interests/*.md` notes
+- `MOCs/Me.md` — index linking to all `me/*.md` notes
+- `me/skills-inventory.md` — seeded from Plan.md Tasks 1 & 3
 - `me/goals.md` — seeded from Plan.md goals list
-- `me/obsessions.md` — seeded from obsession audit
+- `me/obsessions.md` — seeded from Plan.md Task 2
 - `interests/elon-musk.md` — seeded from today's captured idea
-- New templates: `templates/interest-note.md`, `templates/resource-note.md`
+- `templates/interest-note.md` — template for interest notes
 
 ### Downstream updates
 
-**Content skills (7 files in `~/.claude/skills/`):**
-- `cc-capture` — path: `content/ideas.md`
-- `cc-draft` — paths: `content/drafts.md`, `content/ideas.md`
-- `cc-post` — path: `content/posts.md`
-- `cc-review` — update all content paths
-- `cc-recap` — paths: `content/log.md`, `content/posts.md`
-- `cc-research` — path: `content/research.md`
-- `log-content` — path: `content/log.md`
+**Content skills (7 SKILL.md files in `~/.claude/skills/` + any reference files within each skill):**
+- `cc-capture/SKILL.md` — path: `content/ideas.md` (also check `references/` subdir)
+- `cc-draft/SKILL.md` — paths: `content/drafts.md`, `content/ideas.md`
+- `cc-post/SKILL.md` — path: `content/posts.md`
+- `cc-review/SKILL.md` — update all content paths
+- `cc-recap/SKILL.md` — paths: `content/log.md`, `content/posts.md`
+- `cc-research/SKILL.md` — path: `content/research.md`
+- `log-content/SKILL.md` — path: `content/log.md`
 
 **Claude memory files:**
 - `~/.claude/projects/-Users-mikeweng-Desktop-Projects-content/memory/social-media-engine.md` — update vault paths
@@ -158,8 +171,16 @@ One level of subfolders maximum. No deep nesting.
 - `~/.claude/CLAUDE.md` — update `/content` capture section path
 
 **Scripts (verify paths):**
-- `scripts/post-to-threads.py`
-- `scripts/extract-content-insights.sh`
+- `scripts/extract-content-insights.sh` — writes to `content-log.md`, needs path update
+- `scripts/extract-conversations.py` — verify no vault path references
+- `scripts/post-to-threads.py` — verify no vault path references
+
+### Pre-migration safety
+
+1. Close Obsidian and ensure iCloud sync is idle
+2. Create a full vault backup: `cp -r brain/ brain-backup-2026-03-12/`
+3. Proceed with migration
+4. Delete backup after verification passes
 
 ## Verification
 
