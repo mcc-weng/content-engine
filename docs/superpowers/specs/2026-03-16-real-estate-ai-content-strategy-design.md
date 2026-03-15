@@ -9,136 +9,232 @@ A content strategy for attracting real estate agents (particularly those selling
 ### Previous Strategy (Superseded)
 - Dual-track X (English) + Threads (Chinese) engine
 - Brand narrative: "Building my way from Taiwan to America — one AI automation at a time"
-- This spec replaces the platform strategy entirely — X and Threads are not the right platforms for this niche
+- This spec replaces the platform strategy entirely
 
 ### What This Spec Covers
-A full pivot to a real estate vertical with a new platform mix. The content mechanics, positioning, and build strategy are all redesigned around two target audiences: overseas property buyers (Chinese and Taiwanese) and the agents who serve them.
+A full pivot to a real estate vertical with a new 5-platform mix. The content mechanics, positioning, and build strategy are redesigned around two target audiences: overseas Chinese/Taiwanese property buyers and the agents who serve them.
 
 ### Key Assets
-- Older sister is a real estate agent specialising in overseas Chinese buyers (beta client, already open to collaboration)
-- Mike is Taiwanese, bilingual (Traditional Chinese/English), with personal experience as an overseas property buyer
+- Older sister is a real estate agent specialising in overseas Chinese buyers (beta client, open to collaboration)
+- Older sister has existing audience: ~598 YouTube, ~300 Facebook, ~200 Instagram followers — all warm, targeted
+- Mike is Taiwanese, bilingual, with personal experience as an overseas property buyer
 - Direct access to real pain points via older sister before writing a single post
+- Older sister confirmed pain: forgets to follow up with buyers — deals lost to silence, not rejection
+
+### Research Findings (Pre-Spec)
+- **Older sister's workflow:** DM/message inquiry → send property listings + PDFs → call if lead qualifies
+- **Primary communication tool:** WhatsApp and Line (not WeChat — simplifies integration significantly)
+- **Active leads at any time:** <10 (small volume but high value per deal)
+- **CRM:** None — works from memory and chat history
+- **Tech comfort:** 7/10 — can use a web interface, not comfortable with terminal or APIs
+- **Commission structure:** ~7% per deal on Australian properties — high willingness to pay for tools
+- **Language:** Buyers communicate primarily in Mandarin
+- **Confirmed lost deal:** Yes, due to communication delay with overseas buyer
+
+---
 
 ## Positioning
 
 **Core statement:** "The only AI builder who's Taiwanese, bilingual, and has lived the overseas buyer experience."
 
-Agents who sell to Chinese/Taiwanese overseas buyers have a specific, underserved problem set: language gaps, timezone mismatches, WeChat vs email communication, buyers who disappear for weeks then need to move in 48 hours. Mike understands all of this personally. That's the moat.
+Agents who sell to Chinese/Taiwanese overseas buyers have a specific, underserved problem set: leads go quiet for weeks, inquiries arrive at 2am Sydney time, contracts need explaining in Mandarin. Mike understands all of this personally. That's the moat.
 
 ### Two Audiences, One Business
 
 | Audience | Platform | Language | Positioning |
 |---|---|---|---|
-| Overseas Chinese buyers (mainland) | Xiaohongshu (RED) | Simplified Chinese | Bilingual guide helping Chinese buyers navigate Australian property |
-| Overseas Taiwanese buyers + Taiwanese agents | Instagram + Threads | Traditional Chinese | Taiwanese AI builder who understands buying abroad |
-| Real estate agents (overseas buyer segment) | Instagram | English + Traditional Chinese | AI builder who deeply understands the overseas buyer problem set |
+| Overseas Chinese/Taiwanese buyers | RED, Instagram, Threads | Traditional Chinese | Bilingual guide helping overseas buyers navigate Australian property |
+| Real estate agents (overseas buyer segment) | RED, Instagram, Threads, LinkedIn | Traditional Chinese + English | AI builder who deeply understands the overseas buyer problem set |
 
-Both buyer audiences eventually point at the same business. Agents hire Mike to build. Buyers become leads referrable to agent clients.
+Both audiences point at the same business. Agents hire Mike to build. Buyers become leads referrable to agent clients.
 
-### Platform Strategy
-
-**Month 1 (text + photo only — no video)**
-- **Xiaohongshu (RED)**: Primary channel for mainland Chinese buyer audience. High discovery via search (#悉尼买房, #澳洲房产). Open space — no dominant Australian property AI creator exists yet. Authenticity > polish. Content in Simplified Chinese.
-- **Instagram**: Agent personal branding + Taiwanese diaspora audience. Carousels, photos. Content in Traditional Chinese + English.
-- **Threads**: Taiwanese audience (popular in Taiwan). Conversational, text-heavy. Content in Traditional Chinese.
-
-**Month 2+ (add video after validating demand)**
-- **YouTube**: Long-form suburb breakdowns + buying process explainers in Mandarin. Search-driven, durable, underserved.
-- **TikTok/Reels**: Short-form clips repurposed from YouTube content.
-
-**WeChat**: Not a content platform — a conversion tool. Build a presence here once warm relationships form via RED/Instagram.
+> **Future consideration (not Month 1-3):** Once a base of agent clients exists, explore a tech-enabled overseas buyer referral service — connecting qualified Chinese/Taiwanese buyers directly to agents, charging a referral fee. Leverages both audiences simultaneously.
 
 ### Niche Strategy
-Start with overseas buyer agents as beachhead. The niche is not the ceiling — it's the hook. Once a case study exists, expand to adjacent segments (Asian buyer agents broadly → premium market agents → all Australian agents). Each stage funds the next.
+Start with overseas buyer agents as beachhead. Niche is not the ceiling — it's the hook. Expand: overseas buyer agents → all Australian agents with Chinese buyer exposure → all Australian agents.
 
-"AI for Australian real estate agents" competes with all PropTech. "AI for agents selling to overseas buyers" has almost no competition and makes target agents feel seen.
+---
+
+## Platform Strategy
+
+**Language:** Traditional Chinese across all Chinese-language platforms. Mike is Taiwanese — Traditional Chinese is his native script, authentic to his identity, and readable by all overseas Chinese audiences (mainland, Taiwan, HK, Singapore, Malaysia).
+
+### Month 1 Platforms
+
+| Platform | Language | Approach | Audience | Format |
+|---|---|---|---|---|
+| **Xiaohongshu (RED)** | Traditional Chinese | Manual, primary | Overseas buyers + agents | Long-form notes, photo essays |
+| **Instagram** | Traditional Chinese | Automated carousel | Taiwanese buyers + agents | Carousel (3–5 slides) |
+| **Threads** | Traditional Chinese | Automated | Taiwanese audience | Short conversational posts |
+| **X** | English | Automated | AI/build-in-public community | Short posts, build logs |
+| **LinkedIn** | English | Profile only | Australian agents (professional) | No posting until Month 2 |
+
+**Posting cadence:**
+- RED: 1 post/day (manual, high effort, deep engagement)
+- Instagram + Threads + X: adapted auto-distribution from RED content, 3–5x/week
+- LinkedIn: profile setup only in Month 1; first post Month 2
+
+**Platform format guide:**
+
+| Platform | Format | Length | Tone |
+|---|---|---|---|
+| RED | Long-form note with headers | 300–800 chars | Structured, informative, authentic |
+| Instagram | Carousel (3–5 slides) | Caption 150–300 chars | Visual-first, clear slide text |
+| Threads | Short text post | 100–300 chars | Informal, conversational |
+| X | Short text | 280 chars | Direct, build-in-public voice |
+
+### Month 2 Activations (after validated demand)
+- **LinkedIn:** First post = older sister case study. Manual, high quality. Targets English-speaking Australian agents.
+- **YouTube/Reels:** Short-form video. Mike is comfortable on camera. Suburb walkthroughs, tool demos, building process.
+
+### WeChat
+Not a content platform — a conversion tool. Set up personal WeChat presence once warm relationships form via RED/Instagram.
+
+---
+
+## The MVP: Follow-Up Memory Tool
+
+### The Confirmed Pain
+Older sister forgets to follow up with buyers. Leads go cold not because she's slow — but because they fall out of her head entirely. With <10 active leads at any time, this should be manageable. But it's not, because there's no system.
+
+**One forgotten follow-up at 7% commission on a $1M+ property = $70k+ lost.**
+
+### What to Build
+A tool that remembers her buyers for her and generates the follow-up message when she's forgotten.
+
+**Inputs:** Buyer name, inquiry details, last contacted date, language preference
+**Outputs:** Reminder when follow-up is overdue + personalised Mandarin follow-up message
+**Delivery:** She copies the message into WhatsApp or Line manually
+
+**Architecture (simplest viable):**
+- Airtable base (her leads + last contact date)
+- Automation checks for leads not contacted in X days
+- Claude API generates personalised Mandarin follow-up message
+- Sends her a WhatsApp/Line reminder with the draft message
+
+**Build time: 2–3 days, not 3 weeks.**
+
+### Buildability Check
+Before committing to this build:
+- ✅ No restricted APIs (WhatsApp/Line, not WeChat)
+- ✅ Buildable in <1 week
+- ✅ Sister can use it without help (Airtable UI is familiar enough at 7/10 tech comfort)
+- ✅ No CRM integration needed (she has none)
+
+### Fallback Hierarchy
+If this specific build turns out to be blocked during the interview (e.g., she wants WeChat integration specifically):
+1. **Fallback 1:** After-hours inquiry auto-responder (webhook + Claude API → sends Mandarin acknowledgement to new WhatsApp/Line inquiries at 2am)
+2. **Fallback 2:** Document explanation tool (upload PDF contract → Claude explains key points in plain Mandarin)
+
+Both fallbacks are equally buildable in <1 week without restricted APIs.
+
+---
 
 ## Content Mechanics
 
-### Phase 1: Research-in-Public (Weeks 1-2)
+### Phase 1: Research-in-Public (Weeks 1–2)
 
-Post before building anything. Interview older sister, share findings publicly. Domain experts self-identify in replies — other agents validating pain points or revealing new ones.
+Post before building. Interview older sister AND 2 outside agents. Content attracts agents who recognise their own problem.
 
-**Xiaohongshu post examples (Simplified Chinese):**
-> "我在研究澳洲房产经纪人最头痛的事是什么。我姐做这行X年了，第一个发现是..."
-> "问了我姐：海外买家消失3周突然出现要48小时内签合同，怎么办？她的答案让我重新思考这个问题"
+**RED post examples (Traditional Chinese):**
+> "我在研究海外買家的房仲到底在痛什麼。我姐做這行多年了，第一個發現是..."
+> "問了我姐：海外買家沉默三週突然說要簽約，怎麼辦？她的答案讓我重新思考這個問題"
 
-**Instagram / Threads post examples (Traditional Chinese):**
-> "我在研究海外買家的房產經紀人到底在痛什麼。我姐做這行X年了，第一個發現是..."
-> "問了我姐姐她最頭痛的事：海外買家沉默三週突然說要簽約。她的答案讓我重新思考這個問題。"
+**Beta offer post — Day 9 (not Day 17):**
+> "我姐做澳洲海外買家房仲，她說她最頭痛的是忘記跟進買家。
+> 我正在幫她建一個AI系統解決這件事。
+> 找2個願意免費試用的海外買家房仲——你只需要給我真實反饋。
+> 有興趣的話留言或DM我 👇"
 
-### Phase 2: Build-in-Public (Weeks 3-6)
+### Phase 2: Build-in-Public (Weeks 2–3)
 
-Pick the first AI system based on older sister's highest-pain problem. Build it for her. Document the process publicly across all platforms.
+MVP is a 2-day build. Post the process — including the simplicity of it.
 
-**Xiaohongshu:**
-> "第一天：帮我姐建一个AI跟进系统，专门处理海外买家失联问题。具体是这个问题..."
-
-**Instagram / Threads:**
-> "Day 1：幫我姐建一個 AI 自動跟進系統。這是我要解決的具體問題："
+> "Day 1 build: 用 Airtable + Claude API 幫我姐建了一個追蹤系統。比你想象的簡單多了。這是我的設計思路："
 
 ### Phase 3: Case Study → Client Acquisition (Month 2+)
 
-Older sister's results become the sales pitch. Every new agent who DMs has already seen proof. Case study posts across all platforms. Agents with the same problem reach out.
+Sister's results + cross-promotion from her existing 1,100 followers = first paying clients.
 
-## What to Build First
+**Paid offer post — Day 20:**
+> "幫我姐建好了。她說：「[原文引用]」
+> 如果你是做海外買家的房仲，我可以幫你建同樣的系統。
+> $[X]，3天交付，不好用全退。
+> 有興趣的話DM我。"
 
-Interview older sister before committing. Three highest-probability pain points ranked by AI-solvability and client willingness to pay:
-
-**1. Multilingual follow-up automation** *(most likely #1)*
-Overseas buyers go silent for weeks then reappear expecting immediate action. Agents manually chase via WeChat, email, SMS — often in both languages. An AI system that sends personalised Chinese + English follow-up sequences at the right cadence = hours saved per week, fewer leads slipping through.
-
-**2. After-hours inquiry handling**
-Overseas buyers inquire at 2am Sydney time (normal business hours in China/Taiwan). Agents miss these or respond 12 hours later and lose the lead. An AI that responds immediately, qualifies the buyer, and schedules a call = direct revenue impact.
-
-**3. Document explanation in Chinese**
-Contracts, strata reports, building inspections — overwhelming for overseas buyers who can't read English legal documents. An AI that explains key points in plain Chinese reduces agent back-and-forth dramatically.
-
-**Build order:** Start with whichever older sister says causes her the most pain. That conversation is also the first piece of content.
+---
 
 ## Content Pillars
 
-### Xiaohongshu (Simplified Chinese) — Buyer + Agent Audience
-- **Research drops** (30%): Pain point discoveries from agent interviews, industry observations
-- **Build logs** (30%): Building AI systems for real estate agents, documented step by step
-- **Buyer guides** (25%): How AI is changing the overseas property buying experience, practical tips
-- **Case studies** (15%): Before/after results once sister's tool is live
+### RED (Traditional Chinese) — Primary
+- **Research drops** (25%): Pain point discoveries, agent interviews, industry observations
+- **Build logs** (30%): Day-by-day building the AI system
+- **Buyer guides** (25%): How AI is changing the overseas property buying experience
+- **Case studies + offers** (20%): Results, beta offers, paid offers
 
-### Instagram (Traditional Chinese + English) — Agent + Taiwanese Audience
-- **Research drops** (25%): Same pain point content adapted for carousels
-- **Build logs** (35%): Visual build documentation, demos, screenshots
-- **Agent spotlights** (20%): Featuring sister and future clients (with permission)
-- **Personal brand** (20%): Taiwanese AI builder narrative, credibility building
+### Instagram (Traditional Chinese)
+- **Research drops** (25%): Carousel adaptations of RED content
+- **Build logs** (35%): Visual build documentation
+- **Personal brand** (20%): Taiwanese AI builder narrative
+- **Offers** (20%): Beta and paid offer carousels
 
-### Threads (Traditional Chinese) — Taiwanese Audience
-- **Conversational research** (35%): Informal takes on what agents struggle with
-- **Build updates** (35%): Shorter, more casual build-in-public updates
-- **Hot takes** (30%): Opinions on PropTech, why existing tools fail this segment
+### Threads (Traditional Chinese)
+- **Conversational research** (35%): Informal takes on agent pain points
+- **Build updates** (35%): Casual build-in-public updates
+- **Hot takes** (30%): Opinions on PropTech gaps
 
-## Monetization Path (Real Estate Vertical)
+### X (English)
+- **Build logs** (50%): Short build-in-public updates
+- **AI hot takes** (30%): English-language AI tool opinions
+- **Progress updates** (20%): Revenue/milestone transparency
 
-- **Month 1-2:** Build for older sister (free/discounted), generate case study
-- **Month 2-3:** First paid client ($500-1500 for custom build), content about the win
-- **Month 3-4:** Productize the most-requested build ("I'll set up your overseas buyer follow-up AI for $1200, done in 5 days")
-- **Month 5+:** Serve 5-10 agents on retainer for maintenance + updates, or build SaaS from repeated patterns
+---
+
+## Selling Strategy
+
+**Month 1 is about conversations, not followers.** Every post is designed to start a conversation with an agent. 10 agent conversations by Day 30 = at least 1 client.
+
+| Days | Offer | Goal |
+|---|---|---|
+| 1–8 | No offer — just research posts | Get agents to self-identify |
+| 9–19 | Beta tester spot (free, needs feedback) | Start conversations, validate interest |
+| 20–30 | First paid offer ($X, 3-day delivery, money-back) | Find 1 paying client |
+| Month 2+ | Productized offer backed by case study | Repeatability |
+
+**Pricing anchor:** At 7% commission on Australian properties, one deal saved justifies $2–3k/month tool costs easily. Price the first paid engagement at $500–1500. Don't underprice — it signals low confidence.
+
+---
+
+## Monetization Path
+
+- **Month 1:** Build for older sister (free), beta test with 1–2 outside agents (free), land first paid client ($500–1500)
+- **Month 2–3:** Productized offer ("AI follow-up system for overseas buyer agents, $1200, 3 days") + LinkedIn case study activation
+- **Month 4–6:** Retainer model ($500–800/month maintenance + updates) for 5–10 agents
+- **Month 6+:** SaaS from repeated patterns, or scale service with help
+
+---
 
 ## Architecture Decisions
 
-1. **Full platform pivot** — X and Threads (English) replaced by RED + Instagram + Threads (Chinese); video deferred to Month 2
-2. **Language split** — Xiaohongshu uses Simplified Chinese (mainland audience); Instagram + Threads use Traditional Chinese (Taiwanese audience)
-3. **Niche-first, expand later** — overseas buyer agents are the beachhead, not the ceiling
-4. **Older sister as beta client** — validates pain points, generates case study, reduces sales risk
-5. **Research-in-public breaks the chicken-and-egg** — content attracts clients before the product exists
-6. **Bilingual + Taiwanese identity is the moat** — don't abandon it by going generic
-7. **Build reusable systems** — architecture should transfer to adjacent segments as niche expands
-8. **Content and client acquisition are the same motion** — every post is outreach, every build is content
-9. **Video after validation** — defer YouTube/TikTok to Month 2 once demand is confirmed
+1. **Traditional Chinese everywhere** — native script, authentic identity, readable by all overseas Chinese audiences
+2. **RED primary, others automated** — RED deserves manual attention; Instagram/Threads/X run on content engine
+3. **LinkedIn Month 2** — needs case study to be effective; profile built Month 1
+4. **Follow-up memory, not automation** — the confirmed pain is forgetting, not speed. Build for memory first.
+5. **WhatsApp/Line, not WeChat** — massively simplifies integration; no restricted API concerns
+6. **2-day MVP, not 3-week MVP** — Airtable + Claude prompt + reminder. Ship fast, iterate on real usage.
+7. **Sell in Week 2, not Week 3** — beta offer on Day 9, paid offer on Day 20
+8. **3 agent interviews before building** — sister + 2 outside agents via RED/Instagram cold outreach
+9. **Sister's existing audience is a seed** — confirm cross-promotion during interview; 1,100 warm followers = free Day 1 boost
+10. **Bilingual moat is irreplaceable** — never dilute into generic AI content
+
+---
 
 ## Success Criteria
 
-- Week 1: Accounts set up on Xiaohongshu, Instagram, Threads; first research post published on all three
-- Week 2: Older sister interviewed, 3+ pain points documented publicly
-- Week 3: First AI system for older sister started, build-in-public begun
-- Month 1: First working tool delivered to older sister
-- Month 2: Case study published, first inbound inquiry from non-sister agent; evaluate adding YouTube
-- Month 3: First paid external client ($500+ project)
+- Week 1: All 5 platforms live; first posts on all; RED getting daily engagement
+- Week 2: Sister + 2 outside agents interviewed; beta offer posted; first DMs from agents
+- Week 3: MVP built and delivered to sister; "showed sister the demo" post published
+- Day 20: First paid offer posted
+- Month 1: First paying client ($500+); sister using the tool daily
+- Month 2: LinkedIn case study published; YouTube/video content started; 3+ agents in pipeline
+- Month 3: $1–3k/month recurring; productized offer live
