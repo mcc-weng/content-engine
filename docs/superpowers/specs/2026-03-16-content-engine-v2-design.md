@@ -115,7 +115,7 @@ Each file in `references/platforms/` follows this structure:
 
 | | RED | Instagram | Threads | X | LinkedIn |
 |---|---|---|---|---|---|
-| **Format** | 300-800 char note + images (600+ ideal) | 3-5 slide carousel (up to 10 for deep topics) | 100-300 char text | 280 char text | 1,300-1,900 char text |
+| **Format** | 300-800 char note + images (600+ ideal) | 8-10 slide carousel | 100-300 char text | 280 char text | 1,300-1,900 char text |
 | **#1 Signal** | Saves | Dwell time + swipes | Replies | Conversation depth | Saves |
 | **Hashtags** | 4-7 (1-2 precise + 3-5 long-tail) | 3-5 relevant | Topic tags | 0-2 max | 3-5 relevant |
 | **Language** | Traditional Chinese | English | Traditional Chinese | English | English |
@@ -147,7 +147,7 @@ Each file in `references/platforms/` follows this structure:
 
 ### Instagram
 
-**Format:** Carousels — 3-5 slides for standard posts, up to 8-10 for deep educational content. 4:5 portrait ratio (1080x1350px). Each slide: bold header, minimal text (under 20% text overlay), hook under 12 words. Research shows 8-10 slides maximize engagement, but 3-5 is realistic for daily cadence.
+**Format:** Carousels — 8-10 slides for maximum engagement. 4:5 portrait ratio (1080x1350px). Each slide: bold header, minimal text (under 20% text overlay), hook under 12 words. Every swipe is a distinct engagement event, so more slides = more signal to the algorithm.
 
 **Algorithm:** Dwell time + swipe-through velocity are primary signals. Every swipe = distinct engagement event. Saves are highest-value signal. Completion rate above 60% is critical.
 
@@ -163,7 +163,7 @@ Each file in `references/platforms/` follows this structure:
 - Mixing aspect ratios within a carousel (first slide dictates all)
 - Weak/absent CTAs
 
-**Scaffolds adapt as:** Carousel flow — Slide 1: hook/promise (bold text, answers "is this for me?"), Slides 2-4: value delivery following scaffold body, Final slide: CTA ("Save this", "DM me", "Share with someone who needs this"). Caption: 150-300 chars summarizing the post + hashtags.
+**Scaffolds adapt as:** Carousel flow — Slide 1: hook/promise (bold text, answers "is this for me?"), Slides 2-9: value delivery following scaffold body, Final slide: CTA ("Save this", "DM me", "Share with someone who needs this"). Caption: 150-300 chars summarizing the post + hashtags.
 
 **Image creation:** `/cc-draft` and `/cc-adapt` output slide text and caption only. User creates visual slides manually (e.g., Canva, Figma, or other design tool). The engine's scope is text generation, not image generation. `post-to-instagram.py` accepts publicly accessible image URLs — user uploads designed slides to an image host (e.g., Cloudinary, S3, Imgur) before posting.
 
