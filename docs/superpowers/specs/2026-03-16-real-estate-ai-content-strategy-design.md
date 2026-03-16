@@ -43,8 +43,9 @@ Agents who sell to Chinese/Taiwanese overseas buyers have a specific, underserve
 
 | Audience | Platform | Language | Positioning |
 |---|---|---|---|
-| Overseas Chinese/Taiwanese buyers | RED, Instagram, Threads | Traditional Chinese | Bilingual guide helping overseas buyers navigate Australian property |
-| Real estate agents (overseas buyer segment) | RED, Instagram, Threads, LinkedIn | Traditional Chinese + English | AI builder who deeply understands the overseas buyer problem set |
+| Overseas Chinese/Taiwanese buyers | RED, Threads | Traditional Chinese | Bilingual guide helping overseas buyers navigate Australian property |
+| Real estate agents (overseas buyer segment) | Instagram, LinkedIn, RED | English (Instagram/LinkedIn), Traditional Chinese (RED) | AI builder who deeply understands the overseas buyer problem set |
+| AI/tech community | X | English | Taiwanese developer building in public |
 
 Both audiences point at the same business. Agents hire Mike to build. Buyers become leads referrable to agent clients.
 
@@ -57,14 +58,16 @@ Start with overseas buyer agents as beachhead. Niche is not the ceiling — it's
 
 ## Platform Strategy
 
-**Language:** Traditional Chinese across all Chinese-language platforms. Mike is Taiwanese — Traditional Chinese is his native script, authentic to his identity, and readable by all overseas Chinese audiences (mainland, Taiwan, HK, Singapore, Malaysia).
+**Language split:**
+- Chinese platforms (RED, Threads): Traditional Chinese — Mike's native script, readable by all overseas Chinese audiences
+- English platforms (Instagram, X, LinkedIn): English — Mike's personal brand language, reaches all Australian agents
 
 ### Month 1 Platforms
 
 | Platform | Language | Approach | Audience | Format |
 |---|---|---|---|---|
 | **Xiaohongshu (RED)** | Traditional Chinese | Manual, primary | Overseas buyers + agents | Long-form notes, photo essays |
-| **Instagram** | Traditional Chinese | Automated carousel | Taiwanese buyers + agents | Carousel (3–5 slides) |
+| **Instagram** | English | Automated carousel | Australian agents + personal brand | Carousel (3–5 slides) |
 | **Threads** | Traditional Chinese | Automated | Taiwanese audience | Short conversational posts |
 | **X** | English | Automated | AI/build-in-public community | Short posts, build logs |
 | **LinkedIn** | English | Profile only | Australian agents (professional) | No posting until Month 2 |
@@ -76,12 +79,64 @@ Start with overseas buyer agents as beachhead. Niche is not the ceiling — it's
 
 **Platform format guide:**
 
-| Platform | Format | Length | Tone |
-|---|---|---|---|
-| RED | Long-form note with headers | 300–800 chars | Structured, informative, authentic |
-| Instagram | Carousel (3–5 slides) | Caption 150–300 chars | Visual-first, clear slide text |
-| Threads | Short text post | 100–300 chars | Informal, conversational |
-| X | Short text | 280 chars | Direct, build-in-public voice |
+| Platform | Language | Format | Length | Tone |
+|---|---|---|---|---|
+| RED | Traditional Chinese | Long-form note with headers | 300–800 chars | Structured, informative, authentic |
+| Instagram | English | Carousel (3–5 slides) | Caption 150–300 chars | Visual, professional, personal brand |
+| Threads | Traditional Chinese | Short text post | 100–300 chars | Informal, conversational |
+| X | English | Short text | 280 chars | Direct, build-in-public voice |
+
+### Platform Bios
+
+**Xiaohongshu (RED)** — buyer-first, Traditional Chinese:
+```
+🇹🇼 台灣人，在澳洲買了4間房（布里斯本×1 墨爾本×3）
+現在用 AI 幫海外買家的房仲自動化工作流程
+我姐是雪梨海外買家專業房仲，我在幫她建 AI 系統
+全程公開記錄 ↓
+```
+
+**Instagram** — personal brand, English:
+```
+Taiwanese AI engineer 🤖
+Building AI tools for real estate agents with overseas buyers
+Bought 4 properties across Brisbane & Melbourne
+Documenting the build → sister is my first client
+```
+
+**Threads** — casual Taiwanese identity, Traditional Chinese:
+```
+台灣人 × AI 工程師
+在澳洲買了4間房，我姐在雪梨做海外買家房仲
+現在用 AI 幫她解決最頭痛的問題
+過程都記錄在這裡
+```
+
+**X** — build-in-public, English:
+```
+Taiwanese AI engineer
+Building AI tools for real estate agents with overseas Chinese buyers
+Bought 4 properties in Australia — my sister is a Sydney agent
+Documenting the build →
+```
+
+**LinkedIn** — professional credibility, English:
+
+Headline:
+```
+AI Engineer | Building automation for real estate agents serving overseas buyers
+```
+
+About:
+```
+Taiwanese AI engineer based between Taiwan and Melbourne. I've bought 4 properties across Brisbane and Melbourne, and my older sister is a Sydney real estate agent specialising in overseas Chinese and Taiwanese buyers.
+
+I'm building AI tools that solve the problems generic CRMs miss for agents in this niche — multilingual follow-up, timezone-aware communication, and buyer qualification in Mandarin.
+
+Currently documenting the entire journey on Instagram and Xiaohongshu.
+
+Open to connecting with agents, buyer's agents, and anyone in Australian PropTech.
+```
 
 ### Month 2 Activations (after validated demand)
 - **LinkedIn:** First post = older sister case study. Manual, high quality. Targets English-speaking Australian agents.
@@ -172,11 +227,11 @@ Sister's results + cross-promotion from her existing 1,100 followers = first pay
 - **Buyer guides** (25%): How AI is changing the overseas property buying experience
 - **Case studies + offers** (20%): Results, beta offers, paid offers
 
-### Instagram (Traditional Chinese)
-- **Research drops** (25%): Carousel adaptations of RED content
-- **Build logs** (35%): Visual build documentation
-- **Personal brand** (20%): Taiwanese AI builder narrative
-- **Offers** (20%): Beta and paid offer carousels
+### Instagram (English) — Personal Brand + Agent-Facing
+- **Research drops** (25%): English carousel adaptations of RED findings
+- **Build logs** (35%): Visual build documentation, demos, screenshots
+- **Personal brand** (20%): Taiwanese AI builder in Australia narrative, 4-property credibility
+- **Offers** (20%): Beta and paid offer carousels in English
 
 ### Threads (Traditional Chinese)
 - **Conversational research** (35%): Informal takes on agent pain points
@@ -216,7 +271,7 @@ Sister's results + cross-promotion from her existing 1,100 followers = first pay
 
 ## Architecture Decisions
 
-1. **Traditional Chinese everywhere** — native script, authentic identity, readable by all overseas Chinese audiences
+1. **Language split: Chinese (RED/Threads) + English (Instagram/X/LinkedIn)** — each platform in the language its audience expects; no redundant overlap
 2. **RED primary, others automated** — RED deserves manual attention; Instagram/Threads/X run on content engine
 3. **LinkedIn Month 2** — needs case study to be effective; profile built Month 1
 4. **Follow-up memory, not automation** — the confirmed pain is forgetting, not speed. Build for memory first.

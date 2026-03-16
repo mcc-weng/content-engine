@@ -6,7 +6,7 @@
 
 **Architecture:** Research-in-public → 3 agent interviews → confirmed pain (follow-up memory) → 2-day MVP build → document everything as content → sell fast. The MVP is an Airtable base + Claude API prompt + WhatsApp/Line reminder. No complex integrations, no restricted APIs.
 
-**Platforms:** RED (Traditional Chinese, manual primary), Instagram + Threads + X (automated distribution), LinkedIn (profile only Month 1, posting Month 2).
+**Platforms:** RED + Threads (Traditional Chinese), Instagram + X (English, automated), LinkedIn (English, profile only Month 1).
 
 **This plan covers Days 1–30.** Month 2 activations (LinkedIn case study, YouTube/video) are out of scope but noted at the end.
 
@@ -26,10 +26,10 @@ Complete all of this before posting a single piece of content.
   - Username: consistent handle (e.g. `mikeweng_ai`)
   - Bio (Traditional Chinese):
     ```
-    台灣 AI 工程師
-    幫海外買家的澳洲房仲用 AI 省時間
-    我姐是雪梨海外買家專業房仲
-    正在記錄整個過程 ↓
+    🇹🇼 台灣人，在澳洲買了4間房（布里斯本×1 墨爾本×3）
+    現在用 AI 幫海外買家的房仲自動化工作流程
+    我姐是雪梨海外買家專業房仲，我在幫她建 AI 系統
+    全程公開記錄 ↓
     ```
   - Profile photo: real face, approachable
   - Follow 15 accounts in `#澳洲買房` `#海外買房` `#雪梨房產`
@@ -37,22 +37,49 @@ Complete all of this before posting a single piece of content.
 - [ ] **Step 2: Create/optimise Instagram account**
   - Switch to Professional/Creator account
   - Same username and profile photo as RED
-  - Same bio as RED (Traditional Chinese)
+  - Bio (English — Instagram is your English personal brand):
+    ```
+    Taiwanese AI engineer 🤖
+    Building AI tools for real estate agents with overseas buyers
+    Bought 4 properties across Brisbane & Melbourne
+    Documenting the build → sister is my first client
+    ```
 
-- [ ] **Step 3: Connect Threads to Instagram** (shared login, auto-syncs bio)
+- [ ] **Step 3: Connect Threads to Instagram** (shared login, then customise Threads bio separately)
+  - Threads bio (Traditional Chinese — Threads serves Taiwanese audience):
+    ```
+    台灣人 × AI 工程師
+    在澳洲買了4間房，我姐在雪梨做海外買家房仲
+    現在用 AI 幫她解決最頭痛的問題
+    過程都記錄在這裡
+    ```
 
 - [ ] **Step 4: Create/optimise X account**
   - Bio (English):
     ```
-    Taiwanese AI engineer building tools for niche industries
-    Currently: AI follow-up system for real estate agents with overseas buyers
-    Documenting everything
+    Taiwanese AI engineer
+    Building AI tools for real estate agents with overseas Chinese buyers
+    Bought 4 properties in Australia — my sister is a Sydney agent
+    Documenting the build →
     ```
 
 - [ ] **Step 5: Set up LinkedIn profile**
   - Professional headshot
-  - Headline: "AI Engineer | Building automation tools for real estate agents"
-  - Summary: brief version of your positioning
+  - Headline: `AI Engineer | Building automation for real estate agents serving overseas buyers`
+  - About:
+    ```
+    Taiwanese AI engineer based between Taiwan and Melbourne. I've bought
+    4 properties across Brisbane and Melbourne, and my older sister is a
+    Sydney real estate agent specialising in overseas Chinese and Taiwanese buyers.
+
+    I'm building AI tools that solve the problems generic CRMs miss for
+    agents in this niche — multilingual follow-up, timezone-aware
+    communication, and buyer qualification in Mandarin.
+
+    Currently documenting the entire journey on Instagram and Xiaohongshu.
+
+    Open to connecting with agents, buyer's agents, and anyone in Australian PropTech.
+    ```
   - Connect with 20–30 Australian real estate agents (search: "buyer's agent Sydney", "overseas buyer specialist Australia")
   - **Do not post anything yet — profile only**
 
@@ -104,10 +131,10 @@ Complete all of this before posting a single piece of content.
 - [ ] **Step 8: Update cc-draft skill for multi-platform**
   - Add platform parameter support: `--platform red`, `--platform instagram`, `--platform threads`, `--platform x`
   - RED: long-form Traditional Chinese
-  - Instagram: carousel slide text (Traditional Chinese)
+  - Instagram: carousel slide text (English)
   - Threads: short Traditional Chinese
   - X: short English build-in-public voice
-  - Routing: all Chinese platforms use `content-voice.md`; X uses English fallback guidelines
+  - Routing: RED + Threads use `content-voice.md` (Chinese); Instagram + X use English voice
 
 - [ ] **Step 9: Update cc-post skill**
   - Add Instagram carousel posting via `post-to-instagram.py`
@@ -150,10 +177,11 @@ Complete all of this before posting a single piece of content.
   #澳洲買房 #海外買房 #雪梨房產 #AI工具 #澳洲房仲
   ```
 
-  **Instagram (Traditional Chinese, carousel):**
-  - Slide 1: `我是台灣 AI 工程師，我要幫我姐用 AI 改變她的房仲工作`
-  - Slide 2: "她每天最頭痛的3件事：追失聯買家 / 深夜回覆海外詢問 / 中英文解釋合約"
-  - Slide 3: "我決定：深入研究 → 幫她建工具 → 全程記錄。你有類似的問題嗎？👇"
+  **Instagram (English, carousel):**
+  - Slide 1: `I'm a Taiwanese AI engineer. I'm about to change how my sister does real estate.`
+  - Slide 2: "My sister is a Sydney agent specialising in overseas Chinese buyers. Her 3 biggest daily frustrations: chasing buyers who go silent / responding to enquiries at 2am / explaining contracts in two languages"
+  - Slide 3: "My plan: deeply research the problem → build AI tools to fix it → document everything. Are you an agent dealing with similar issues? 👇"
+  - Caption: `Taiwanese AI engineer × Australian real estate — the build starts now. I've bought 4 properties here, my sister sells them. Now I'm building AI to fix what's broken. #PropTech #AItools #RealEstateAI #AustralianProperty`
 
   **Threads (Traditional Chinese, short):**
   ```
@@ -185,31 +213,40 @@ Complete all of this before posting a single piece of content.
 ### Task 2: Community Seeding (Days 2–7)
 
 - [ ] **Step 3: Daily engagement routine (repeat every day, 15 min)**
-  - RED: Comment on 3–5 posts in `#澳洲買房` `#海外買房` `#雪梨房產`
-  - Instagram: Comment on 3–5 posts from agents or Taiwanese buyers
-  - Threads: Reply to 3–5 overseas buyer / Taiwan–Australia property conversations
+  - RED: Comment on 3–5 posts in `#澳洲買房` `#海外買房` `#雪梨房產` (Traditional Chinese)
+  - Instagram: Comment on 3–5 posts from Australian agents or property-related accounts (English)
+  - Threads: Reply to 3–5 overseas buyer / Taiwan–Australia property conversations (Traditional Chinese)
   - Save any agents you interact with to a shortlist for interview outreach
 
 - [ ] **Step 4: Day 3 — personal buyer story post (all platforms)**
-  - Share your own experience researching or buying property overseas
-  - RED: long-form with specific details (what was confusing, what you wished existed)
-  - Instagram: carousel — "3 things nobody told me about buying Australian property as an overseas buyer"
-  - Threads: short personal take with question at end
-  - X: one-line hook version in English
+  - Share your experience buying 4 properties across Brisbane and Melbourne
+  - RED (Traditional Chinese): long-form — what was confusing, what you wished existed, specific suburb details
+  - Instagram (English): carousel — "4 properties, 2 cities, here's what I learned buying Australian property as an overseas buyer"
+  - Threads (Traditional Chinese): short personal take with question at end
+  - X (English): one-line hook version
 
 - [ ] **Step 5: Day 5 — audience question post**
-  - RED/Instagram/Threads: `如果你是做海外買家業務的房仲，你最頭痛的一件事是什麼？`
-  - X: "Agents who work with overseas buyers: what's the #1 thing that wastes your time every week?"
+  - RED/Threads (Traditional Chinese): `如果你是做海外買家業務的房仲，你最頭痛的一件事是什麼？`
+  - Instagram (English): "Agents who work with overseas buyers: what's the #1 thing that wastes your time every week?"
+  - X (English): same as Instagram
   - Save every reply to `real-estate-research.md`
 
 - [ ] **Step 6: Days 5–7 — identify 2 outside agents to interview**
   - Review agents who commented on your posts or who you engaged with during seeding
-  - Search RED/Instagram for active agents posting about overseas buyers in Australia
-  - DM outreach message (Traditional Chinese):
+  - Search RED for agents posting about overseas buyers (Chinese-speaking agents)
+  - Search Instagram for Australian agents in the overseas buyer segment (English-speaking agents)
+  - DM outreach — match the platform language:
+    RED/Threads (Traditional Chinese):
     ```
     你好，我是 AI 工程師，正在研究海外買家房仲在工作上最頭痛的問題。
     你願意跟我聊 20 分鐘嗎？
     我想聽聽你的經驗——不是要賣你東西。
+    ```
+    Instagram (English):
+    ```
+    Hey, I'm an AI engineer researching the biggest pain points for agents
+    who work with overseas buyers. Would you be open to a 20-minute chat?
+    I'm genuinely interested in your experience — not trying to sell anything.
     ```
   - Goal: 2 confirmed conversations booked before Day 8
   - If <2 confirmed by Day 7: ask older sister if she can introduce 1 colleague
@@ -620,9 +657,11 @@ Complete all of this before posting a single piece of content.
 | Threads | 3–5 | Automated from RED |
 | X | 3–5 | Automated (English adapted) |
 
-**Audience mix per platform:**
-- RED: 70% buyer-facing, 30% agent-facing (buyers discover RED first)
-- Instagram/Threads: 60% agent-facing, 40% buyer-facing
+**Audience + language per platform:**
+- RED (Traditional Chinese): 70% buyer-facing, 30% agent-facing
+- Instagram (English): 70% agent-facing, 30% personal brand
+- Threads (Traditional Chinese): 60% buyer-facing, 40% casual updates
+- X (English): 100% build-in-public / AI community
 
 **Weekly review (Sunday, 30 min):**
 - What performed best this week?
