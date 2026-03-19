@@ -12,6 +12,24 @@ The first deployment is for Mike's older sister — a Sydney real estate agent s
 
 OpenClaw is an open-source, locally-run AI agent with persistent memory, WhatsApp integration, and 50+ connectors. Rather than building a custom agent from scratch or buying into a platform like Wayscape, we use OpenClaw as the AI brain and build thin middleware around it for channel monitoring, approval workflows, and voice learning.
 
+### Technical Validation (Required Before Build)
+
+Before committing to this architecture, a 2-hour spike must verify:
+
+| Capability | Status | Fallback if Missing |
+|---|---|---|
+| Persistent memory with structured data | Unverified | Use SQLite/JSON file store alongside OpenClaw |
+| WhatsApp integration (monitoring convos) | Unverified | WhatsApp Web automation via Playwright, or start without WhatsApp |
+| Line integration | Unverified | Line Messaging API adapter (custom code) |
+| Claude as underlying LLM | Documented on site | Switch to direct Claude API calls if OpenClaw's LLM layer is limiting |
+| Natural language command parsing | Unverified | Custom prompt layer on top of Claude API |
+
+**If 3+ capabilities are missing or broken, pivot to Approach 3 (custom agent with Claude API directly).** The middleware design (channel adapters, approval queue, voice store) remains valid regardless of whether OpenClaw or a custom agent is the brain.
+
+### Scope Acknowledgement
+
+This spec replaces the earlier "Airtable + Claude API + email reminder, 2-day build" MVP defined in the content strategy. The scope is deliberately larger because the goal shifted from "minimal reminder tool" to "full communication co-pilot." This is weeks of work, not days. The trade-off is intentional — a more capable Day 1 product earns trust faster and justifies the service fee.
+
 ### Why Not Wayscape
 
 Wayscape is an Australian real estate platform (CRM + off-market listings + AI assistant + training). It's the "Salesforce" approach — broad, platform-first, English-only. We don't compete with Wayscape on listings, CRM, or agent networks. We compete on the communication layer that overseas buyer agents struggle with: multilingual follow-ups, cross-timezone responses, and conversational memory across messaging apps buyers actually use.
@@ -51,7 +69,8 @@ Use OpenClaw as the AI brain (memory, reasoning, message drafting). Build lightw
 │  │  [Email IMAP listener]   ← monitors inbox    │       │
 │  │                                               │       │
 │  │  All adapters normalize messages into:        │       │
-│  │  { channel, sender, content, timestamp, lang }│       │
+│  │  { channel, sender, content, timestamp,       │       │
+│  │    lang, direction, message_type, thread_id } │       │
 │  └──────────────┬────────────────────────────────┘       │
 │                 │                                        │
 │                 ▼                                        │
@@ -97,6 +116,29 @@ Use OpenClaw as the AI brain (memory, reasoning, message drafting). Build lightw
 3. **Approval queue is custom code, not OpenClaw's** — full control over UX and auto-pilot gating logic.
 4. **Voice store is append-only** — every edit and explicit rule stored. OpenClaw pulls from this when drafting.
 5. **Deployed on Mike's laptop for Day 1** — migrate to VPS when scaling to multiple clients.
+
+### Day 1 Limitations (Laptop Deployment)
+
+- System is only active when the laptop is running and awake. After-hours auto-reply will NOT work if the laptop is closed at 10pm.
+- No process supervision — if OpenClaw crashes, it stays down until Mike notices.
+- Mitigation: Mike keeps the laptop running during the initial testing phase. If after-hours coverage proves critical (likely), migrate to a VPS ($5-10/month) as the first post-Day-1 upgrade.
+- **Data backup:** Daily cron job copies OpenClaw's data directory + voice store + lead profiles to cloud storage (iCloud or S3). Lead data for active real estate deals is not acceptable to lose.
+
+### Channel API Requirements
+
+Both WhatsApp Business API and Line Messaging API require setup that is not instant:
+
+- **WhatsApp Business API:** Requires Facebook Business Manager, business verification, and compliance review. Can take days to weeks. **Fallback:** Start with Line + Email only for Day 1. Add WhatsApp when approved. Alternatively, use a third-party abstraction layer (e.g., Twilio, 360dialog).
+- **Line Messaging API:** Requires Line Official Account registration. Free tier supports up to 200 messages/month (sufficient for <10 leads). Setup is faster than WhatsApp but still not instant.
+- **Email (IMAP):** No approval needed. Works immediately with any email provider.
+
+**Realistic Day 1 channel availability:** Email (immediate) + Line (days) + WhatsApp (days to weeks). Start with whatever is ready first.
+
+### Colleague Message Handling
+
+Colleagues sometimes reply to buyers through the agent's accounts. The system cannot distinguish colleague messages from the agent's own messages automatically.
+
+**Day 1 approach:** Treat all outgoing messages from the agent's accounts as "agent sent." If this causes a follow-up to fire incorrectly, the agent can tell the AI: "that was [colleague], ignore it" or "don't follow up on that one." This is a known limitation — acceptable for <10 leads where the agent knows who said what.
 
 ---
 
@@ -297,12 +339,26 @@ Architecture supports this from Day 1 — the approval step is a configurable ga
 
 ---
 
+## Cost Estimates (Per Client)
+
+| Item | Cost | Notes |
+|---|---|---|
+| Claude API (Sonnet) | ~$5-15/month | <10 leads, ~50 messages/day including drafts |
+| WhatsApp Business API | ~$0-10/month | Low volume, per-conversation pricing |
+| Line Messaging API | Free | Under 200 messages/month on free tier |
+| VPS (post-Day 1) | $5-10/month | When migrating off laptop |
+| **Total per client** | **~$10-35/month** | |
+
+At a service fee of $500-1500 setup + $500-800/month, margins are strong. Exact costs TBD after Day 1 usage measurement.
+
+---
+
 ## Success Criteria
 
 - Sister can text the AI on WhatsApp/Line and it understands her commands
 - All WhatsApp, Line, and email conversations are monitored and leads tracked
 - Follow-up drafts are generated daily for overdue leads in the correct language
-- After-hours messages get a smart auto-reply (when auto-pilot enabled)
+- After-hours messages are detected and follow-up drafts are queued for morning review
 - Voice quality improves over first 2 weeks of edits
 - Sister reports she hasn't forgotten to follow up with any lead since deployment
 - Zero messages sent without approval (until auto-pilot explicitly enabled)
