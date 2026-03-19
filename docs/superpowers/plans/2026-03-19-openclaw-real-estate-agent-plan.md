@@ -200,8 +200,8 @@ npm init -y
 - [ ] **Step 2: Install dependencies**
 
 ```bash
-npm install @whiskeysockets/baileys @line/bot-sdk imapflow better-sqlite3 node-cron dotenv zod pino
-npm install -D typescript @types/node @types/better-sqlite3 vitest tsx
+npm install @whiskeysockets/baileys @line/bot-sdk@7 imapflow better-sqlite3 node-cron dotenv zod pino @hapi/boom
+npm install -D typescript @types/node @types/better-sqlite3 @types/node-cron vitest tsx pino-pretty
 ```
 
 - [ ] **Step 3: Create tsconfig.json**
@@ -459,7 +459,7 @@ git commit -m "feat: project scaffolding with types, config, and entry point"
 ```typescript
 // tests/db.test.ts
 import { describe, it, expect, afterEach } from "vitest";
-import { Database } from "../src/db.js";
+import { Database } from "../../src/db.js";
 import { unlinkSync, existsSync } from "fs";
 
 const TEST_DB = "data/test.db";
@@ -614,8 +614,8 @@ git commit -m "feat: SQLite database layer with schema for leads, approvals, voi
 ```typescript
 // tests/leads/store.test.ts
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { LeadStore } from "../src/leads/store.js";
-import { Database } from "../src/db.js";
+import { LeadStore } from "../../src/leads/store.js";
+import { Database } from "../../src/db.js";
 import { unlinkSync, existsSync } from "fs";
 
 const TEST_DB = "data/test-leads.db";
@@ -854,8 +854,8 @@ git commit -m "feat: lead store with CRUD, follow-up scheduling, and channel ide
 ```typescript
 // tests/approval/queue.test.ts
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { ApprovalQueue } from "../src/approval/queue.js";
-import { Database } from "../src/db.js";
+import { ApprovalQueue } from "../../src/approval/queue.js";
+import { Database } from "../../src/db.js";
 import { unlinkSync, existsSync } from "fs";
 
 const TEST_DB = "data/test-approval.db";
@@ -1046,9 +1046,9 @@ git commit -m "feat: approval queue with enqueue, approve, edit, reject"
 ```typescript
 // tests/voice/store.test.ts
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { VoiceStore } from "../src/voice/store.js";
-import { buildVoicePrompt } from "../src/voice/voice-prompt.js";
-import { Database } from "../src/db.js";
+import { VoiceStore } from "../../src/voice/store.js";
+import { buildVoicePrompt } from "../../src/voice/voice-prompt.js";
+import { Database } from "../../src/db.js";
 import { unlinkSync, existsSync } from "fs";
 
 const TEST_DB = "data/test-voice.db";
@@ -1223,7 +1223,7 @@ git commit -m "feat: voice store and prompt builder for learning agent's writing
 ```typescript
 // tests/brain/openclaw-bridge.test.ts
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { OpenClawBridge } from "../src/brain/openclaw-bridge.js";
+import { OpenClawBridge } from "../../src/brain/openclaw-bridge.js";
 
 const mockFetch = vi.fn();
 vi.stubGlobal("fetch", mockFetch);
@@ -1435,7 +1435,7 @@ export interface ChannelAdapter {
 ```typescript
 // tests/adapters/email.test.ts
 import { describe, it, expect } from "vitest";
-import { EmailAdapter } from "../src/adapters/email.js";
+import { EmailAdapter } from "../../src/adapters/email.js";
 
 describe("EmailAdapter", () => {
   it("has correct name", () => {
@@ -1633,7 +1633,7 @@ git commit -m "feat: base channel adapter interface and email IMAP adapter"
 ```typescript
 // tests/adapters/whatsapp.test.ts
 import { describe, it, expect } from "vitest";
-import { WhatsAppAdapter } from "../src/adapters/whatsapp.js";
+import { WhatsAppAdapter } from "../../src/adapters/whatsapp.js";
 
 describe("WhatsAppAdapter", () => {
   it("has correct name", () => {
@@ -1784,14 +1784,7 @@ export class WhatsAppAdapter implements ChannelAdapter {
 }
 ```
 
-- [ ] **Step 4: Install Boom dependency**
-
-```bash
-npm install @hapi/boom
-npm install -D @types/hapi__boom
-```
-
-- [ ] **Step 5: Run tests to verify they pass**
+- [ ] **Step 4: Run tests to verify they pass**
 
 ```bash
 npx vitest run tests/adapters/whatsapp.test.ts
@@ -1819,7 +1812,7 @@ git commit -m "feat: WhatsApp adapter using Baileys for conversation monitoring"
 ```typescript
 // tests/adapters/line.test.ts
 import { describe, it, expect } from "vitest";
-import { LineAdapter } from "../src/adapters/line.js";
+import { LineAdapter } from "../../src/adapters/line.js";
 
 describe("LineAdapter", () => {
   it("has correct name", () => {
@@ -2056,11 +2049,11 @@ git commit -m "feat: adapter manager to start/stop all channel adapters"
 ```typescript
 // tests/leads/follow-up-scheduler.test.ts
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { FollowUpScheduler } from "../src/leads/follow-up-scheduler.js";
-import { LeadStore } from "../src/leads/store.js";
-import { ApprovalQueue } from "../src/approval/queue.js";
-import { VoiceStore } from "../src/voice/store.js";
-import { Database } from "../src/db.js";
+import { FollowUpScheduler } from "../../src/leads/follow-up-scheduler.js";
+import { LeadStore } from "../../src/leads/store.js";
+import { ApprovalQueue } from "../../src/approval/queue.js";
+import { VoiceStore } from "../../src/voice/store.js";
+import { Database } from "../../src/db.js";
 import { unlinkSync, existsSync } from "fs";
 
 const TEST_DB = "data/test-followup.db";
@@ -2113,7 +2106,7 @@ npx vitest run tests/leads/follow-up-scheduler.test.ts
 
 ```typescript
 // src/leads/follow-up-scheduler.ts
-import cron from "node-cron";
+import * as cron from "node-cron";
 import { logger } from "../utils/logger.js";
 import { LeadStore } from "./store.js";
 import { ApprovalQueue } from "../approval/queue.js";
@@ -2273,7 +2266,185 @@ git commit -m "feat: OpenClaw skill definition for real estate co-pilot behavior
 
 ---
 
-## Task 13: Wire Everything Together in index.ts
+## Task 13: Approval Handler (Send After Approve)
+
+**Files:**
+- Create: `src/approval/approval-handler.ts`
+- Create: `tests/approval/approval-handler.test.ts`
+
+This connects the approval queue to the channel adapters — when the agent approves a draft, it gets sent via the correct channel. Edits are stored as voice examples.
+
+- [ ] **Step 1: Write failing test**
+
+```typescript
+// tests/approval/approval-handler.test.ts
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { ApprovalHandler } from "../../src/approval/approval-handler.js";
+import { ApprovalQueue } from "../../src/approval/queue.js";
+import { VoiceStore } from "../../src/voice/store.js";
+import { Database } from "../../src/db.js";
+import { unlinkSync, existsSync } from "fs";
+
+const TEST_DB = "data/test-handler.db";
+let db: Database;
+let queue: ApprovalQueue;
+let voiceStore: VoiceStore;
+let handler: ApprovalHandler;
+const mockSend = vi.fn().mockResolvedValue(true);
+
+beforeEach(() => {
+  db = new Database(TEST_DB);
+  queue = new ApprovalQueue(db);
+  voiceStore = new VoiceStore(db);
+  handler = new ApprovalHandler(queue, voiceStore, mockSend);
+  mockSend.mockClear();
+  db.raw.prepare("INSERT INTO leads (id, name, preferred_channel, language) VALUES (?, ?, ?, ?)").run("lead-1", "Mrs Chen", "whatsapp", "zh-TW");
+});
+
+afterEach(() => {
+  db.close();
+  if (existsSync(TEST_DB)) unlinkSync(TEST_DB);
+});
+
+describe("ApprovalHandler", () => {
+  it("sends message via adapter after approval", async () => {
+    const item = queue.enqueue({
+      leadId: "lead-1",
+      draftMessage: "嗨 Mrs Chen",
+      channel: "whatsapp",
+      recipientId: "+61412345678",
+      type: "follow_up",
+    });
+
+    queue.approve(item.id);
+    await handler.processApproved();
+
+    expect(mockSend).toHaveBeenCalledWith("whatsapp", "+61412345678", "嗨 Mrs Chen");
+  });
+
+  it("stores edit as voice example when message was edited", async () => {
+    const item = queue.enqueue({
+      leadId: "lead-1",
+      draftMessage: "Original draft",
+      channel: "whatsapp",
+      recipientId: "+61412345678",
+      type: "follow_up",
+    });
+
+    queue.editAndApprove(item.id, "Edited version");
+    await handler.processApproved();
+
+    expect(mockSend).toHaveBeenCalledWith("whatsapp", "+61412345678", "Edited version");
+    const examples = voiceStore.getExamples("zh-TW");
+    expect(examples).toHaveLength(1);
+    expect(examples[0].originalDraft).toBe("Original draft");
+    expect(examples[0].editedVersion).toBe("Edited version");
+  });
+
+  it("skips rejected items", async () => {
+    const item = queue.enqueue({
+      leadId: "lead-1",
+      draftMessage: "Bad draft",
+      channel: "whatsapp",
+      recipientId: "+61412345678",
+      type: "follow_up",
+    });
+
+    queue.reject(item.id);
+    await handler.processApproved();
+
+    expect(mockSend).not.toHaveBeenCalled();
+  });
+});
+```
+
+- [ ] **Step 2: Run tests to verify they fail**
+
+```bash
+npx vitest run tests/approval/approval-handler.test.ts
+```
+
+- [ ] **Step 3: Implement ApprovalHandler**
+
+```typescript
+// src/approval/approval-handler.ts
+import { logger } from "../utils/logger.js";
+import { ApprovalQueue } from "./queue.js";
+import { VoiceStore } from "../voice/store.js";
+import { Database } from "../db.js";
+
+type SendFn = (channel: string, recipientId: string, content: string) => Promise<boolean>;
+
+export class ApprovalHandler {
+  constructor(
+    private queue: ApprovalQueue,
+    private voiceStore: VoiceStore,
+    private sendFn: SendFn,
+    private db?: Database
+  ) {}
+
+  async processApproved(): Promise<number> {
+    // Get items that have been approved or edited but not yet sent
+    const items = this.db
+      ? this.db.raw.prepare(
+          "SELECT aq.*, l.language FROM approval_queue aq JOIN leads l ON aq.lead_id = l.id WHERE aq.status IN ('approved', 'edited') AND aq.resolved_at IS NOT NULL"
+        ).all() as any[]
+      : [];
+
+    let sent = 0;
+    for (const item of items) {
+      const messageToSend = item.edited_message || item.draft_message;
+
+      try {
+        const success = await this.sendFn(item.channel, item.recipient_id, messageToSend);
+        if (!success) {
+          logger.warn({ itemId: item.id }, "Failed to send approved message");
+          continue;
+        }
+
+        // If the message was edited, store as voice example
+        if (item.status === "edited" && item.edited_message) {
+          this.voiceStore.addExample(item.draft_message, item.edited_message, item.language || "en");
+          logger.info({ itemId: item.id }, "Voice example stored from edit");
+        }
+
+        // Mark as fully processed (update status to distinguish from pending approval)
+        this.db?.raw.prepare(
+          "UPDATE approval_queue SET status = 'sent' WHERE id = ?"
+        ).run(item.id);
+
+        sent++;
+      } catch (err) {
+        logger.error({ err, itemId: item.id }, "Error sending approved message");
+      }
+    }
+
+    if (sent > 0) logger.info({ sent }, "Approved messages sent");
+    return sent;
+  }
+}
+```
+
+Note: The `sent` status needs to be added to the schema. Update the `approval_queue` status to include `sent` as a valid value. The existing schema uses TEXT so no migration needed.
+
+- [ ] **Step 4: Run tests to verify they pass**
+
+```bash
+npx vitest run tests/approval/approval-handler.test.ts
+```
+
+Expected: PASS
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add src/approval/approval-handler.ts tests/approval/approval-handler.test.ts
+git commit -m "feat: approval handler — sends messages after approve, stores edits as voice examples"
+```
+
+---
+
+## Task 14: Wire Everything Together in index.ts
 
 **Files:**
 - Modify: `src/index.ts`
@@ -2319,10 +2490,13 @@ async function main() {
 
     const existingLead = leadStore.findByChannelIdentity(msg.channel, msg.sender);
 
-    const hour = new Date().getHours();
+    // Timezone-aware business hours check
+    const sydneyTime = new Date().toLocaleString("en-AU", { timeZone: config.businessHours.timezone });
+    const hour = new Date(sydneyTime).getHours();
     const isAfterHours = hour < config.businessHours.start || hour >= config.businessHours.end;
 
-    const prompt = isAfterHours && msg.direction === "inbound" && !existingLead
+    // After-hours prompt applies to ALL inbound buyer messages, not just new leads
+    const prompt = isAfterHours && msg.direction === "inbound"
       ? buildAfterHoursPrompt(msg, existingLead)
       : buildInboundMessagePrompt(msg, existingLead);
 
@@ -2336,6 +2510,7 @@ async function main() {
 
     try {
       const parsed = JSON.parse(response);
+      let resolvedLeadId = existingLead?.id;
 
       if (parsed.isNewLead && parsed.leadUpdate) {
         const newLead = leadStore.create({
@@ -2348,6 +2523,7 @@ async function main() {
           notes: parsed.leadUpdate.notes,
           channelIdentities: [{ channel: msg.channel, identifier: msg.sender }],
         });
+        resolvedLeadId = newLead.id;
         logger.info({ leadId: newLead.id, name: newLead.name }, "New lead created");
       } else if (existingLead) {
         if (msg.direction === "inbound") {
@@ -2360,16 +2536,15 @@ async function main() {
         }
       }
 
-      if (parsed.shouldDraftReply && parsed.draftReply) {
-        const leadId = existingLead?.id || "unknown";
+      if (parsed.shouldDraftReply && parsed.draftReply && resolvedLeadId) {
         approvalQueue.enqueue({
-          leadId,
+          leadId: resolvedLeadId,
           draftMessage: parsed.draftReply,
           channel: msg.channel as any,
           recipientId: msg.sender,
           type: isAfterHours ? "after_hours_reply" : "response",
         });
-        logger.info({ leadId }, "Draft queued for approval");
+        logger.info({ leadId: resolvedLeadId }, "Draft queued for approval");
       }
     } catch {
       logger.warn("OpenClaw response was not parseable JSON — treating as conversational response");
@@ -2429,7 +2604,7 @@ git commit -m "feat: wire all components together in main entry point"
 
 ---
 
-## Task 14: Backup Script
+## Task 15: Backup Script
 
 **Files:**
 - Create: `backup/backup.sh`
@@ -2470,7 +2645,7 @@ git commit -m "feat: daily backup script for data and OpenClaw memory"
 
 ---
 
-## Task 15: Integration Smoke Test
+## Task 16: Integration Smoke Test
 
 **Files:**
 - Create: `tests/integration/smoke.test.ts`
@@ -2480,11 +2655,11 @@ git commit -m "feat: daily backup script for data and OpenClaw memory"
 ```typescript
 // tests/integration/smoke.test.ts
 import { describe, it, expect, afterEach } from "vitest";
-import { Database } from "../src/db.js";
-import { LeadStore } from "../src/leads/store.js";
-import { ApprovalQueue } from "../src/approval/queue.js";
-import { VoiceStore } from "../src/voice/store.js";
-import { FollowUpScheduler } from "../src/leads/follow-up-scheduler.js";
+import { Database } from "../../src/db.js";
+import { LeadStore } from "../../src/leads/store.js";
+import { ApprovalQueue } from "../../src/approval/queue.js";
+import { VoiceStore } from "../../src/voice/store.js";
+import { FollowUpScheduler } from "../../src/leads/follow-up-scheduler.js";
 import { unlinkSync, existsSync } from "fs";
 
 const TEST_DB = "data/test-smoke.db";
