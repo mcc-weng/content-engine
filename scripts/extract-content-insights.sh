@@ -3,6 +3,7 @@ set -euo pipefail
 
 # Allow running from within a Claude Code session or cron
 unset CLAUDECODE 2>/dev/null || true
+export USER="${USER:-$(whoami)}"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONTENT_LOG="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/brain/content/log.md"
