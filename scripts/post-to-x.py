@@ -24,7 +24,10 @@ import base64
 import urllib.parse
 import uuid
 import requests
+from pathlib import Path
+from dotenv import load_dotenv
 
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 TWEET_URL = "https://api.twitter.com/2/tweets"
 

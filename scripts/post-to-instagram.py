@@ -15,6 +15,10 @@ import os
 import sys
 import time
 import requests
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 BASE_URL = "https://graph.facebook.com/v21.0"
 
