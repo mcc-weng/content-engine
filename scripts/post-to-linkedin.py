@@ -22,6 +22,8 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
+from token_refresh import ensure_fresh_token
+
 API_BASE = "https://api.linkedin.com/v2"
 
 
@@ -126,6 +128,9 @@ def post_to_linkedin(text, media_path=None, dry_run=False):
         if media_path:
             print(f"  With image: {media_path}", file=sys.stderr)
         return "https://linkedin.com/feed/dry-run"
+
+    ensure_fresh_token("linkedin")
+    token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
 
     headers = {
         "Authorization": f"Bearer {token}",

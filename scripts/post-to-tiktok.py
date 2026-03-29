@@ -20,6 +20,8 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
+from token_refresh import ensure_fresh_token
+
 API_BASE = "https://open.tiktokapis.com/v2"
 POLL_INTERVAL_SECS = 5
 POLL_TIMEOUT_SECS = 120
@@ -73,6 +75,9 @@ def post_to_tiktok(text, video_path, dry_run=False):
         print(f"  Video: {video_path} ({video_size} bytes)", file=sys.stderr)
         print(f"  Caption ({len(text)} chars): {text}", file=sys.stderr)
         return "https://tiktok.com/dry-run"
+
+    ensure_fresh_token("tiktok")
+    token = os.environ.get("TIKTOK_ACCESS_TOKEN")
 
     headers = {
         "Authorization": f"Bearer {token}",

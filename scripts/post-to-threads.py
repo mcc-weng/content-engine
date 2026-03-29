@@ -20,6 +20,8 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
+from token_refresh import ensure_fresh_token
+
 BASE_URL = "https://graph.threads.net/v1.0"
 
 
@@ -68,6 +70,9 @@ def post_to_threads(text: str, dry_run: bool = False) -> str:
         print(f"[DRY RUN] Would post to Threads ({len(text)} chars):", file=sys.stderr)
         print(text, file=sys.stderr)
         return "https://threads.net/dry-run"
+
+    ensure_fresh_token("threads")
+    token = os.environ.get("THREADS_ACCESS_TOKEN")
 
     # Step 1: Create container
     create_resp = _retry_on_5xx(

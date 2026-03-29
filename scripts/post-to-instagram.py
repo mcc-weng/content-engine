@@ -20,6 +20,8 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
+from token_refresh import ensure_fresh_token
+
 BASE_URL = "https://graph.facebook.com/v21.0"
 
 POLL_INTERVAL_SECS = 3
@@ -69,6 +71,9 @@ def post_carousel_to_instagram(image_urls: list[str], caption: str, dry_run: boo
             print(f"  Image {i}: {url}", file=sys.stderr)
         print(f"  Caption ({len(caption)} chars): {caption}", file=sys.stderr)
         return "https://www.instagram.com/p/dry-run"
+
+    ensure_fresh_token("instagram")
+    token = os.environ.get("INSTAGRAM_ACCESS_TOKEN")
 
     if not account_id:
         print("Error: INSTAGRAM_BUSINESS_ACCOUNT_ID env var not set", file=sys.stderr)
