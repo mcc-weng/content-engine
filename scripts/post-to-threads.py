@@ -3,6 +3,7 @@
 
 Usage:
   python3 post-to-threads.py "Post text here"
+  python3 post-to-threads.py --topic "Technology" "Post text here"
   python3 post-to-threads.py --dry-run "Post text here"
 
 Requires env vars:
@@ -53,7 +54,7 @@ def _retry_on_5xx(make_request, step_name):
     return resp
 
 
-def post_to_threads(text: str, dry_run: bool = False) -> str:
+def post_to_threads(text: str, topic: str = None, dry_run: bool = False) -> str:
     """Publish a text post to Threads. Returns permalink URL."""
     token = os.environ.get("THREADS_ACCESS_TOKEN")
     user_id = os.environ.get("THREADS_USER_ID")
@@ -67,7 +68,8 @@ def post_to_threads(text: str, dry_run: bool = False) -> str:
         sys.exit(1)
 
     if dry_run:
-        print(f"[DRY RUN] Would post to Threads ({len(text)} chars):", file=sys.stderr)
+        topic_str = f" [topic: {topic}]" if topic else ""
+        print(f"[DRY RUN] Would post to Threads ({len(text)} chars){topic_str}:", file=sys.stderr)
         print(text, file=sys.stderr)
         return "https://threads.net/dry-run"
 
@@ -75,14 +77,18 @@ def post_to_threads(text: str, dry_run: bool = False) -> str:
     token = os.environ.get("THREADS_ACCESS_TOKEN")
 
     # Step 1: Create container
+    create_params = {
+        "media_type": "TEXT",
+        "text": text,
+        "access_token": token,
+    }
+    if topic:
+        create_params["topic_tag"] = topic
+
     create_resp = _retry_on_5xx(
         lambda: requests.post(
             f"{BASE_URL}/{user_id}/threads",
-            params={
-                "media_type": "TEXT",
-                "text": text,
-                "access_token": token,
-            },
+            params=create_params,
         ),
         "create container",
     )
@@ -119,14 +125,20 @@ def post_to_threads(text: str, dry_run: bool = False) -> str:
 if __name__ == "__main__":
     args = sys.argv[1:]
     dry_run = False
+    topic = None
     if "--dry-run" in args:
         dry_run = True
         args.remove("--dry-run")
+    if "--topic" in args:
+        idx = args.index("--topic")
+        topic = args[idx + 1]
+        args.pop(idx)  # remove --topic
+        args.pop(idx)  # remove topic value
 
     if not args:
-        print("Usage: python3 post-to-threads.py [--dry-run] \"Post text\"", file=sys.stderr)
+        print("Usage: python3 post-to-threads.py [--dry-run] [--topic \"Topic\"] \"Post text\"", file=sys.stderr)
         sys.exit(1)
 
     text = args[0]
-    permalink = post_to_threads(text, dry_run=dry_run)
+    permalink = post_to_threads(text, topic=topic, dry_run=dry_run)
     print(permalink)

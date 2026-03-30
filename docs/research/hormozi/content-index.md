@@ -11,10 +11,12 @@
 |----------|--------------|---------------|------------|------------|
 | YouTube | 4,719 videos | "You Need to Build the Right Foundation" | 9.5M views | [content-index-youtube.md](content-index-youtube.md) |
 | Instagram | 120 posts | "Buy shit from your friends businesses..." (reel) | 156.7K likes | [content-index-instagram.md](content-index-instagram.md) |
-| X/Twitter | 17 top tweets | "My mother died..." (personal) | 208.8K likes | [content-index-x.md](content-index-x.md) |
-| LinkedIn | 5 recent posts | Carousel (image post) | 3.0K reactions | [content-index-linkedin.md](content-index-linkedin.md) |
+| X/Twitter | 179 tweets | "Buy shit from your friends businesses..." | 23.7K likes | [content-index-x.md](content-index-x.md) |
+| LinkedIn | 74 posts | (image/carousel post, unlabeled) | 10.1K reactions | [content-index-linkedin.md](content-index-linkedin.md) |
+| acquisition.com blog | N/A | — | — | No public blog exists |
+| TikTok | Skipped | — | — | Repurposed content only |
 
-**Total indexed: 4,861 pieces of content**
+**Total indexed: 5,092 pieces of content**
 
 ### Key observations
 - YouTube is the primary framework distribution channel; Instagram/X/LinkedIn are mostly repurposed short-form clips and motivational one-liners

@@ -33,7 +33,11 @@ def save_state(sessions):
 
 
 def extract_messages(jsonl_path):
-    """Extract user/assistant text messages from a JSONL file."""
+    """Extract user/assistant text messages from a JSONL file.
+
+    Filters out tool_result blocks, image blocks, and progress messages
+    to keep only the human conversation and assistant reasoning.
+    """
     messages = []
     session_id = None
     project = jsonl_path.parent.name
@@ -54,6 +58,15 @@ def extract_messages(jsonl_path):
                 content = obj.get("message", {}).get("content", "")
                 if isinstance(content, str) and content.strip():
                     messages.append(f"USER: {content.strip()}")
+                elif isinstance(content, list):
+                    # Extract only human-typed text, skip tool_result/image blocks
+                    for block in content:
+                        if isinstance(block, dict) and block.get("type") == "text":
+                            text = block.get("text", "").strip()
+                            if text:
+                                messages.append(f"USER: {text}")
+                        elif isinstance(block, str) and block.strip():
+                            messages.append(f"USER: {block.strip()}")
 
             elif msg_type == "assistant":
                 content = obj.get("message", {}).get("content", [])
@@ -63,6 +76,7 @@ def extract_messages(jsonl_path):
                             text = block.get("text", "").strip()
                             if text:
                                 messages.append(f"ASSISTANT: {text}")
+                        # Skip tool_use blocks — no content value for insights
                 elif isinstance(content, str) and content.strip():
                     messages.append(f"ASSISTANT: {content.strip()}")
 
