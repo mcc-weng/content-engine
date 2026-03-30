@@ -1,7 +1,7 @@
 # The Only 4 Ways To Scale A Service Business (PICK ONE)
 
 **URL:** https://www.youtube.com/watch?v=O1As2zxy0es
-**Views:** 573K | **Duration:** 14:24
+**Views:** 573K | **Duration:** 14:24 | **Date:** YouTube
 **Topics:** scaling, agency, service business
 
 ---
