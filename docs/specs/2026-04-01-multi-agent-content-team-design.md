@@ -61,7 +61,7 @@ cc-post (Publish — unchanged)
 
 ### Retired Skills
 
-- **cc-draft** — Replaced by cc-editor-* agents. SKILL.md retired, but the directory becomes a shared reference library.
+- **cc-draft** — Replaced by cc-editor-* agents. SKILL.md retired, directory renamed to `cc-shared-refs` as a shared reference library.
 - **cc-adapt** — Replaced entirely. Editors draft natively in parallel — no "adapt from one platform" step.
 - **cc-brainstorm** — Absorbed into cc-strategist's angle proposal step.
 - **cc-review** — Retired. Not used.
@@ -194,7 +194,7 @@ The existing `voice-feedback.md` gets split: platform-specific entries go to the
 ├── cc-editor-youtube/
 │   └── SKILL.md
 │
-├── cc-draft/                      (shared reference library — no longer a skill)
+├── cc-shared-refs/                (shared reference library — renamed from cc-draft)
 │   ├── assets/
 │   │   └── post-templates.md
 │   └── references/
@@ -230,7 +230,7 @@ The existing `voice-feedback.md` gets split: platform-specific entries go to the
 
 ### Shared References
 
-All editors load from `~/.claude/skills/cc-draft/references/`:
+All editors load from `~/.claude/skills/cc-shared-refs/references/`:
 - `platforms/[platform].md` — format specs, algorithm signals, tone rules
 - `platforms/[platform]-hooks-research.md` — viral hook patterns
 - `hook-types.md` — 8 hook type definitions
