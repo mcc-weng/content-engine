@@ -58,25 +58,25 @@ INSTAGRAM_BUSINESS_ACCOUNT_ID=PLACEHOLDER_run_extract_or_reauth
 INSTAGRAM_ACCESS_TOKEN=PLACEHOLDER_run_extract_or_reauth
 
 # --- X (API credits depleted — kept for future use) ---
-X_API_KEY=S1rGsrEHooiznmaodxfEKuxib
-X_API_SECRET=NxhscTd2hXtMXH2eLqncvE4OaVpTNcefVNdCG4DQchmcOxMa7N
+X_API_KEY=<redacted — rotate + store in password manager>
+X_API_SECRET=<redacted — rotate + store in password manager>
 X_ACCESS_TOKEN=PLACEHOLDER_run_extract_or_reauth
 X_ACCESS_TOKEN_SECRET=PLACEHOLDER_run_extract_or_reauth
 
 # --- LinkedIn ---
-LINKEDIN_CLIENT_ID=865ixu2mgkqmqc
-LINKEDIN_CLIENT_SECRET=WPL_AP1.6DBL83bYQ2T2CxP8.HgdfAg==
+LINKEDIN_CLIENT_ID=<redacted — rotate + store in password manager>
+LINKEDIN_CLIENT_SECRET=<redacted — rotate + store in password manager>
 LINKEDIN_ACCESS_TOKEN=PLACEHOLDER_run_extract_or_reauth
 LINKEDIN_PERSON_ID=PLACEHOLDER_get_via_userinfo_endpoint
 
 # --- TikTok ---
-TIKTOK_CLIENT_KEY=sbawngpa1dpp3sue1f
-TIKTOK_CLIENT_SECRET=P2IP7Q80VQIUfsENTChlqpDpa5XbZidc
+TIKTOK_CLIENT_KEY=<redacted — rotate + store in password manager>
+TIKTOK_CLIENT_SECRET=<redacted — rotate + store in password manager>
 TIKTOK_ACCESS_TOKEN=PLACEHOLDER_run_extract_or_reauth
 
 # --- YouTube ---
-YOUTUBE_CLIENT_ID=915530216100-ojf4nc399oe6ih43r1nocfou0gk3f601.apps.googleusercontent.com
-YOUTUBE_CLIENT_SECRET=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
+YOUTUBE_CLIENT_ID=<redacted — rotate + store in password manager>
+YOUTUBE_CLIENT_SECRET=<redacted — rotate + store in password manager>
 YOUTUBE_REFRESH_TOKEN=PLACEHOLDER_run_extract_or_reauth
 ```
 
